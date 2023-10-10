@@ -9,6 +9,12 @@ const styles = StyleSheet.create({
     marginTop: 28,
     marginBottom: 10,
   },
+  thin: {
+    fontWeight: '300',
+    color: colors.purple,
+    fontSize: 24,
+    paddingHorizontal: 24,
+  },
 });
 
 export default styles;
