@@ -1,5 +1,6 @@
 import React from 'react';
 import {ScrollView, SafeAreaView, Text, View} from 'react-native';
+import { useSelector } from 'react-redux';
 import styles from './styles';
 import Header from '../../../components/Header';
 import PlusIcon from '../../../components/PlusIcon';

@@ -1,10 +1,9 @@
+import 'react-native-gesture-handler';
 import React from 'react';
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
-import 'react-native-gesture-handler';
-import {createStackNavigator} from '@react-navigation/stack';
+import {Provider} from 'react-redux';
 import Routes from './src/Routes';
-
-const Stack = createStackNavigator();
+import store from './src/store';
 
 const App = () => {
   const theme = {
@@ -16,9 +15,11 @@ const App = () => {
   };
 
   return (
-    <NavigationContainer theme={theme}>
-      <Routes />
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer theme={theme}>
+        <Routes />
+      </NavigationContainer>
+    </Provider>
   );
 };
 

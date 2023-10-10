@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import {
   ActivityIndicator,
   Alert,
@@ -20,6 +21,8 @@ import moment from 'moment';
 import firestore from '@react-native-firebase/firestore';
 
 const AddTask = ({navigation}) => {
+  const user = useSelector(state => state.user.data);
+  const dispatch = useDispatch();
   const [title, setTitle] = useState();
   const [category, setCategory] = useState();
   const [deadline, setDeadline] = useState(new Date());
@@ -50,11 +53,12 @@ const AddTask = ({navigation}) => {
     setLoading(true);
     firestore()
       .collection('Tasks')
-      .doc('ABC')
-      .set({
+      .add({
         title,
         deadline,
         category,
+        checked: false,
+        userId: user?.uid,
       })
       .then(() => {
         setLoading(false);
@@ -96,7 +100,7 @@ const AddTask = ({navigation}) => {
         <DateInput value={deadline} onChange={setDeadline} />
 
         {loading ? (
-          <ActivityIndicator style={{marginTop: 5}} />
+          <ActivityIndicator style={{marginTop: 15}} />
         ) : (
           <Button style={styles.button} type="blue" onPress={onSubmit}>
             Add Task
