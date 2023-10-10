@@ -18,6 +18,7 @@ import moment from 'moment';
 const Home = ({navigation}) => {
   const tasks = useSelector(state => state.tasks.data);
   const user = useSelector(state => state.user.data);
+  const toUpdate = useSelector(state => state.tasks.toUpdate);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -37,7 +38,7 @@ const Home = ({navigation}) => {
 
         dispatch(setTasks(tasksList));
       });
-  }, [user, dispatch]);
+  }, [user, toUpdate, dispatch]);
 
   return (
     <SafeAreaView style={styles.container}>

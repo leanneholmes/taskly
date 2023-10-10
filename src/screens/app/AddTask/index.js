@@ -19,6 +19,7 @@ import DateInput from '../../../components/DateInput';
 import Button from '../../../components/Button';
 import moment from 'moment';
 import firestore from '@react-native-firebase/firestore';
+import {setToUpdate} from '../../../store/tasks';
 
 const AddTask = ({navigation}) => {
   const user = useSelector(state => state.user.data);
@@ -62,6 +63,7 @@ const AddTask = ({navigation}) => {
       })
       .then(() => {
         setLoading(false);
+        dispatch(setToUpdate());
         clearForm();
         navigation.navigate('Tasks');
       })
