@@ -11,28 +11,33 @@ import {useDispatch, useSelector} from 'react-redux';
 import Header from '../../../components/Header';
 import PlusIcon from '../../../components/PlusIcon';
 import Title from '../../../components/Title';
+import {setTasks} from '../../../store/tasks';
 import styles from './styles';
 import moment from 'moment';
 
 const Home = ({navigation}) => {
+  const tasks = useSelector(state => state.tasks.data);
   const user = useSelector(state => state.user.data);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const subscriber = firestore()
+    firestore()
       .collection('Tasks')
+      .where('userId', '==', user?.uid)
       .get()
       .then(querySnapshot => {
-        console.log('Total tasks ', querySnapshot.size);
+        const tasksList = [];
+
         querySnapshot.forEach(documentSnapshot => {
-          console.log(
-            'Task ID: ',
-            documentSnapshot.id,
-            documentSnapshot.data(),
-          );
+          tasksList.push({
+            uid: documentSnapshot.id,
+            ...(documentSnapshot.data() || {}),
+          });
         });
+
+        dispatch(setTasks(tasksList));
       });
-  }, [user]);
+  }, [user, dispatch]);
 
   return (
     <SafeAreaView style={styles.container}>
