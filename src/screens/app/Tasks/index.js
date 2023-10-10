@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {SafeAreaView, Text, View, FlatList} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
+import firestore from '@react-native-firebase/firestore';
 import styles from './styles';
 import Header from '../../../components/Header';
 import PlusIcon from '../../../components/PlusIcon';
@@ -8,6 +9,7 @@ import Title from '../../../components/Title';
 import Checkbox from '../../../components/Checkbox';
 import Categories from '../../../components/Categories';
 import categories from '../../../constants/categories';
+import {setToUpdate} from '../../../store/tasks';
 
 const Tasks = () => {
   const dispatch = useDispatch();
