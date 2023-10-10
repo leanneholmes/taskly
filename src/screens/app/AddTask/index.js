@@ -46,10 +46,10 @@ const AddTask = ({navigation}) => {
       Alert.alert('Please enter a name for the task');
       return;
     }
-    if (moment(deadlineFormatted).isBefore(today)) {
-      Alert.alert('Due date cannot be in the past');
-      return;
-    }
+    // if (moment(deadlineFormatted).isBefore(today)) {
+    //   Alert.alert('Due date cannot be in the past');
+    //   return;
+    // }
 
     setLoading(true);
     firestore()

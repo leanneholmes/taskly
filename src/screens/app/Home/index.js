@@ -47,17 +47,17 @@ const Home = ({navigation}) => {
     if (tasks?.length) {
       const highPriority = tasks?.filter(
         task =>
-          (task?.category === 'urgent' && task?.checked === 'false') ||
-          (task?.category === 'important' && task?.checked === 'false'),
+          (task?.category === 'urgent' && task?.checked === false) ||
+          (task?.category === 'important' && task?.checked === false),
       );
       const today = moment(new Date()).format('YYYY-MM-DD');
       const overdue = tasks?.filter(task => {
         const deadline = task?.deadline?.seconds * 1000;
         const deadlineFormatted = moment(deadline).format('YYYY-MM-DD');
-        return moment(deadlineFormatted).isBefore(today);
+        return (moment(deadlineFormatted).isBefore(today) && task?.checked === false);
       });
       const quickWin = tasks?.filter(
-        task => task?.category === 'quick_task' && task?.checked === 'false',
+        task => (task?.category === 'quick_task' && task?.checked === false),
       );
 
       setCounts({
